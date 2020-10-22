@@ -5,6 +5,8 @@ tar -C /usr/local -xzf go1.15.3.linux-amd64.tar.gz
 echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 . ~/.bashrc
 
-go build -o ./bin/server ./cmd/server/main.go
+ls -al
 
+go build -o ./bin/server ./cmd/server/main.go
+chmod +x ./bin/server
 ./bin/server --PORT=80
