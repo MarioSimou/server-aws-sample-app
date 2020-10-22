@@ -4,9 +4,15 @@ files:
   - source: /
     destination: /home/ec2-user/server
 hooks:
+  ApplicationStop:
+    - location: ./scripts/stop.sh
+      timeout: 60
+      runas: root
   Install:
     - location: ./scripts/install.sh
-      timeout: 300
+      timeout: 60
+      runas: root
   ApplicationStart:
     - location: ./scripts/start.sh
-      timeout: 300
+      timeout: 60
+      runas: root
