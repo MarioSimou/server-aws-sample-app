@@ -9,6 +9,4 @@ echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
 
 go version
 
-go build -o ./bin/server ./cmd/server/main.go
-
 exit 0
