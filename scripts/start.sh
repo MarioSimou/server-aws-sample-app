@@ -9,4 +9,4 @@
 
 go build -o ./bin/server ./cmd/server/main.go
 
-./bin/server --PORT=80 > /dev/null 2>&1 &
+./bin/server --PORT=80 > /dev/null 2> /dev/null < /dev/null &
