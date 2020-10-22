@@ -10,4 +10,4 @@ ls -al
 
 go build -o ./bin/server ./cmd/server/main.go
 
-./bin/server --PORT=80
+./bin/server --PORT=80 &
