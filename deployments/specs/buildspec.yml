@@ -19,8 +19,6 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - pwd
-      - ls -al
       - docker build --build-arg PORT=${PORT} -t server:latest -f ./deployments/server.prod.dockerfile .
       - docker tag server:latest ${REPOSITORY_URI}:${IMAGE_TAG}
   post_build:
