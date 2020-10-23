@@ -1,0 +1,32 @@
+version: 0.2
+
+env:
+  variables:
+    REPOSITORY_URI: 644015966802.dkr.ecr.us-east-1.amazonaws.com/server
+    IMAGE_TAG: latest
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - printf 'Region %s\n' ${AWS_DEFAULT_REGION}
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t server:latest -f ./deployments/server.prod.dockerfile .
+      - docker tag server:latest ${REPOSITORY_URI}:${IMAGE_TAG}
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push ${REPOSITORY_URI}:${IMAGE_TAG}
+      - echo Writing image definitions file...
+      - printf '[{"name":"server","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json

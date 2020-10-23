@@ -21,7 +21,7 @@ func TestPing(t *testing.T){
 		t.Errorf("Error: %v\n", e)
 	}
 
-	if s := string(body); s != "pong" {
-		t.Errorf("Expected string 'pong' rather than '%s'", s)
+	if s := string(body); s != "PONG" {
+		t.Errorf("Expected string 'PONG' rather than '%s'", s)
 	}
 }
