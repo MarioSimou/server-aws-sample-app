@@ -4,6 +4,7 @@ env:
   variables:
     REPOSITORY_URI: 644015966802.dkr.ecr.us-east-1.amazonaws.com/server
     IMAGE_TAG: latest
+    PORT: 8080
 
 phases:
   install:
@@ -20,7 +21,7 @@ phases:
       - echo Building the Docker image...
       - pwd
       - ls -al
-      - docker build -t server:latest -f ./deployments/server.prod.dockerfile .
+      - docker build --build-arg PORT=${PORT} -t server:latest -f ./deployments/server.prod.dockerfile .
       - docker tag server:latest ${REPOSITORY_URI}:${IMAGE_TAG}
   post_build:
     commands:
